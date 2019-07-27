@@ -70,6 +70,15 @@ namespace Bowling_Kata
         }
 
         [TestMethod]
+        public void Rolls_13_times_strike_return_minus1()
+        {
+            var result = new ArrayList();
+            Roll(10, result, 13);
+
+            ScoreShouldBe(-1, result);
+        }
+
+        [TestMethod]
         public void Rolls_all_frame_9_0_return_90()
         {
             var result = new ArrayList();

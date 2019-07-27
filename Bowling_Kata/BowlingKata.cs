@@ -18,12 +18,15 @@ namespace Bowling_Kata
             // 測資意外處理
             foreach (var pins in result)
             {
-                if ((int)pins == 10)
+                if ((int)pins == 10 && frameIndex != 10)
                 {
                     frameIndex += 1;
-                    if (frameIndex > 10)
+                }
+                else if ((int)pins == 10 && frameIndex == 10)
+                {
+                    if (result.Count != 12)
                     {
-                        frameIndex = 10;
+                        frameIndex += 1;
                     }
                 }
                 else
@@ -45,17 +48,16 @@ namespace Bowling_Kata
                 }
             }
 
+            if (frameIndex != 10)
+            {
+                return -1;
+            }
+
             var score = 0;
             var rollIndex = 0;
 
             for (var i = 0; i < MaxFrame; i++)
             {
-                // 未完成遊戲意外處理
-                if (rollIndex + 2 > result.Count)
-                {
-                    return -1;
-                }
-
                 if (IsStrike(result, rollIndex))
                 {
                     score += StrikeScore(result, rollIndex);
