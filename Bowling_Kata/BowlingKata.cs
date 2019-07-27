@@ -11,6 +11,20 @@ namespace Bowling_Kata
 
         public int Score(ArrayList result)
         {
+            //總球數不能大於21球
+            if (result.Count > 21)
+            {
+                return -1;
+            }
+            // 任一球不能大於10瓶
+            foreach (var pins in result)
+            {
+                if ((int)pins > 10)
+                {
+                    return -1;
+                }
+            }
+
             var frameIndex = 0;
             var rollCount = 0;
             var accumulatedPins = 0;
@@ -18,16 +32,37 @@ namespace Bowling_Kata
             // 測資意外處理
             foreach (var pins in result)
             {
-                if (result.Count > 21)
-                {
-                    return -1;
-                }
-
                 if (frameIndex == 10)
                 {
-                    if (result.Count - index >= 1 && result.Count - index <= 2)
+                    if (result.Count - index == 2)
                     {
-                        break;
+                        if ((int)result[index] == 10)
+                        {
+                            break;
+                        }
+                        else if ((int)result[index] + (int)result[index + 1] == 10)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            return -1;
+                        }
+                    }
+                    else if (result.Count - index == 1)
+                    {
+                        if ((int)result[index - 2] == 10)
+                        {
+                            break;
+                        }
+                        else if ((int)result[index - 2] + (int)result[index - 1] == 10)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            return -1;
+                        }
                     }
                     else
                     {

@@ -103,6 +103,22 @@ namespace Bowling_Kata
         }
 
         [TestMethod]
+        public void Rolls_10_frame_5_4_3_return_minus1()
+        {
+            var result = new ArrayList();
+            for (var i = 0; i < 9; i++)
+            {
+                Roll(9, result);
+                Roll(0, result);
+            }
+            Roll(5, result);
+            Roll(4, result);
+            Roll(3, result);
+
+            ScoreShouldBe(-1, result);
+        }
+
+        [TestMethod]
         public void Rolls_out_of_frame_return_minus1()
         {
             var result = new ArrayList();
