@@ -15,9 +15,12 @@ namespace Bowling_Kata
             var result = new ArrayList();
             result = Roll(0, result, 20);
 
-            var actual = _bowlingKata.Score(result);
+            ScoreShouldBe(0, result);
+        }
 
-            Assert.AreEqual(0, actual);
+        private void ScoreShouldBe(int expected, ArrayList result)
+        {
+            Assert.AreEqual(expected, _bowlingKata.Score(result));
         }
 
         private static ArrayList Roll(int pins, ArrayList result, int times = 1)
