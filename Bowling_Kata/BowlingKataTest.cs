@@ -46,7 +46,7 @@ namespace Bowling_Kata
             var result = new ArrayList();
             Roll(10, result);
             Roll(1, result);
-            Roll(0, result, 18);
+            Roll(0, result, 17);
 
             ScoreShouldBe(12, result);
         }
@@ -76,6 +76,17 @@ namespace Bowling_Kata
             Roll(10, result, 13);
 
             ScoreShouldBe(-1, result);
+        }
+
+        [TestMethod]
+        public void Rolls_only_10_frame_strike_return_160()
+        {
+            var result = new ArrayList();
+            Roll(5, result, 18);
+            Roll(10, result);
+            Roll(5, result, 2);
+
+            ScoreShouldBe(160, result);
         }
 
         [TestMethod]

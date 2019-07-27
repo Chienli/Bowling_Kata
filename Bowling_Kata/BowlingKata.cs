@@ -14,20 +14,30 @@ namespace Bowling_Kata
             var frameIndex = 0;
             var rollCount = 0;
             var accumulatedPins = 0;
-
+            var index = 0;
             // 測資意外處理
             foreach (var pins in result)
             {
+                if (result.Count > 21)
+                {
+                    return -1;
+                }
+
+                if (frameIndex == 10)
+                {
+                    if (result.Count - index >= 1 && result.Count - index <= 2)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        return -1;
+                    }
+                }
+
                 if ((int)pins == 10 && frameIndex != 10)
                 {
                     frameIndex += 1;
-                }
-                else if ((int)pins == 10 && frameIndex == 10)
-                {
-                    if (result.Count != 12)
-                    {
-                        frameIndex += 1;
-                    }
                 }
                 else
                 {
@@ -46,6 +56,7 @@ namespace Bowling_Kata
                         rollCount = 0;
                     }
                 }
+                index++;
             }
 
             if (frameIndex != 10)
