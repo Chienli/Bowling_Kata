@@ -14,23 +14,48 @@ namespace Bowling_Kata
             var rollIndex = 0;
             for (var i = 0; i < MaxFrame; i++)
             {
-                if ((int)result[rollIndex] == 10)
+                if (IsStrike(result, rollIndex))
                 {
-                    score += 10 + (int)result[rollIndex + 1] + (int)result[rollIndex + 2];
+                    score += StrikeScore(result, rollIndex);
                     rollIndex += 1;
                 }
-                else if ((int)result[rollIndex] + (int)result[rollIndex + 1] == 10)
+                else if (IsSpare(result, rollIndex))
                 {
-                    score += 10 + (int)result[rollIndex + 2];
+                    score += SpareScore(result, rollIndex);
                     rollIndex += 2;
                 }
                 else
                 {
-                    score += (int)result[rollIndex] + (int)result[rollIndex + 1];
+                    score += NormalScore(result, rollIndex);
                     rollIndex += 2;
                 }
             }
             return score;
+        }
+
+        private static int NormalScore(IList result, int rollIndex)
+        {
+            return (int)result[rollIndex] + (int)result[rollIndex + 1];
+        }
+
+        private static int SpareScore(IList result, int rollIndex)
+        {
+            return 10 + (int)result[rollIndex + 2];
+        }
+
+        private static bool IsSpare(IList result, int rollIndex)
+        {
+            return (int)result[rollIndex] + (int)result[rollIndex + 1] == 10;
+        }
+
+        private static int StrikeScore(IList result, int rollIndex)
+        {
+            return 10 + (int)result[rollIndex + 1] + (int)result[rollIndex + 2];
+        }
+
+        private static bool IsStrike(IList result, int rollIndex)
+        {
+            return (int)result[rollIndex] == 10;
         }
     }
 }
