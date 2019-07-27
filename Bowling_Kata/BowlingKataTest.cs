@@ -28,6 +28,18 @@ namespace Bowling_Kata
             ScoreShouldBe(1, result);
         }
 
+        [TestMethod]
+        public void Rolls_spare_then_1_return_12()
+        {
+            var result = new ArrayList();
+            Roll(5, result);
+            Roll(5, result);
+            Roll(1, result);
+            Roll(0, result, 17);
+
+            ScoreShouldBe(12, result);
+        }
+
         private void ScoreShouldBe(int expected, ArrayList result)
         {
             Assert.AreEqual(expected, _bowlingKata.Score(result));
