@@ -82,6 +82,33 @@ namespace Bowling_Kata
             ScoreShouldBe(90, result);
         }
 
+        [TestMethod]
+        public void Sample_All_cases()
+        {
+            var result = new ArrayList();
+
+            Roll(1, result);
+            Roll(4, result);
+            Roll(4, result);
+            Roll(5, result);
+            Roll(6, result);
+            Roll(4, result);
+            Roll(5, result);
+            Roll(5, result);
+            Roll(10, result);
+            Roll(0, result);
+            Roll(1, result);
+            Roll(7, result);
+            Roll(3, result);
+            Roll(6, result);
+            Roll(4, result);
+            Roll(10, result);
+            Roll(2, result);
+            Roll(8, result);
+            Roll(6, result);
+            ScoreShouldBe(133, result);
+        }
+
         private void ScoreShouldBe(int expected, ArrayList result)
         {
             Assert.AreEqual(expected, _bowlingKata.Score(result));
