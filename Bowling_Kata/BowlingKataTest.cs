@@ -69,6 +69,19 @@ namespace Bowling_Kata
             ScoreShouldBe(300, result);
         }
 
+        [TestMethod]
+        public void Rolls_all_frame_9_0_return_90()
+        {
+            var result = new ArrayList();
+            for (var i = 0; i < 10; i++)
+            {
+                Roll(9, result);
+                Roll(0, result);
+            }
+
+            ScoreShouldBe(90, result);
+        }
+
         private void ScoreShouldBe(int expected, ArrayList result)
         {
             Assert.AreEqual(expected, _bowlingKata.Score(result));
