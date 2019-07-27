@@ -14,7 +14,12 @@ namespace Bowling_Kata
             var rollIndex = 0;
             for (var i = 0; i < MaxFrame; i++)
             {
-                if ((int)result[rollIndex] + (int)result[rollIndex + 1] == 10)
+                if ((int)result[rollIndex] == 10)
+                {
+                    score += 10 + (int)result[rollIndex + 1] + (int)result[rollIndex + 2];
+                    rollIndex += 1;
+                }
+                else if ((int)result[rollIndex] + (int)result[rollIndex + 1] == 10)
                 {
                     score += 10 + (int)result[rollIndex + 2];
                     rollIndex += 2;
