@@ -83,6 +83,24 @@ namespace Bowling_Kata
         }
 
         [TestMethod]
+        public void Rolls_out_of_frame_return_minus1()
+        {
+            var result = new ArrayList();
+            Roll(1, result, 22);
+
+            ScoreShouldBe(-1, result);
+        }
+
+        [TestMethod]
+        public void Rolls_no_complete_all_frame_return_minus1()
+        {
+            var result = new ArrayList();
+            Roll(1, result, 4);
+
+            ScoreShouldBe(-1, result);
+        }
+
+        [TestMethod]
         public void Sample_All_cases()
         {
             var result = new ArrayList();
