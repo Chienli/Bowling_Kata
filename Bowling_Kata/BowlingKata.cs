@@ -8,7 +8,13 @@ namespace Bowling_Kata
     {
         public int Score(ArrayList result)
         {
-            return 0;
+            var score = 0;
+            foreach (var pins in result)
+            {
+                score += (int)pins;
+            }
+
+            return score;
         }
     }
 }

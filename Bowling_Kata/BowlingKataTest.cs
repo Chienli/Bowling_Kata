@@ -13,9 +13,19 @@ namespace Bowling_Kata
         public void Rolls_all_0_return_0()
         {
             var result = new ArrayList();
-            result = Roll(0, result, 20);
+            Roll(0, result, 20);
 
             ScoreShouldBe(0, result);
+        }
+
+        [TestMethod]
+        public void Rolls_1_return_1()
+        {
+            var result = new ArrayList();
+            Roll(1, result);
+            Roll(0, result, 19);
+
+            ScoreShouldBe(1, result);
         }
 
         private void ScoreShouldBe(int expected, ArrayList result)
@@ -23,13 +33,12 @@ namespace Bowling_Kata
             Assert.AreEqual(expected, _bowlingKata.Score(result));
         }
 
-        private static ArrayList Roll(int pins, ArrayList result, int times = 1)
+        private static void Roll(int pins, ArrayList result, int times = 1)
         {
             for (var i = 0; i < times; i++)
             {
                 result.Add(pins);
             }
-            return result;
         }
     }
 }
