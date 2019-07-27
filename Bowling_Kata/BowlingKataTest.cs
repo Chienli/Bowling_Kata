@@ -51,6 +51,15 @@ namespace Bowling_Kata
             ScoreShouldBe(12, result);
         }
 
+        [TestMethod]
+        public void Rolls_all_5_return_150()
+        {
+            var result = new ArrayList();
+            Roll(5, result, 21);
+
+            ScoreShouldBe(150, result);
+        }
+
         private void ScoreShouldBe(int expected, ArrayList result)
         {
             Assert.AreEqual(expected, _bowlingKata.Score(result));
