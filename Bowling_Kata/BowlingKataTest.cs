@@ -13,7 +13,7 @@ namespace Bowling_Kata
         [TestMethod]
         public void Rolls_all_0_return_0()
         {
-            _bowlingKata.Roll(0);
+            RollManyTimes(0, 20);
 
             ScoreShouldBe(0);
         }
@@ -59,6 +59,13 @@ namespace Bowling_Kata
             RollManyTimes(10, 12);
 
             ScoreShouldBe(300);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void Rolls_out_of_range_expected_outOfRangeException()
+        {
+            RollManyTimes(10, 25);
         }
 
         [TestMethod]

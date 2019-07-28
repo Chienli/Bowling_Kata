@@ -7,11 +7,11 @@ namespace Bowling_Kata
 {
     public class BowlingKata
     {
-        private const int MaxFrame = 10;
-        private bool _firstRow = true;
-        private int _frame = 1;
-        private readonly int[] _pinsPerRoll = new int[21];
         private int _rollIndex;
+        private int _frame = 1;
+        private bool _firstRoll = true;
+        private const int MaxFrame = 10;
+        private readonly int[] _pinsPerRoll = new int[21];
 
         public int Frame
         {
@@ -46,7 +46,7 @@ namespace Bowling_Kata
 
         public void Roll(int pins)
         {
-            if (_firstRow)
+            if (_firstRoll)
             {
                 if (pins == 10)
                 {
@@ -54,12 +54,12 @@ namespace Bowling_Kata
                 }
                 else
                 {
-                    _firstRow = false;
+                    _firstRoll = false;
                 }
             }
             else
             {
-                _firstRow = true;
+                _firstRoll = true;
                 Frame++;
             }
 
