@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Bowling_Kata
@@ -7,55 +8,87 @@ namespace Bowling_Kata
     public class BowlingKata
     {
         private const int MaxFrame = 10;
+        private bool _firstRow = true;
+        private int _frame = 1;
+        private readonly int[] _pinsPerRoll = new int[21];
+        private int _rollIndex;
 
-        public int Score(ArrayList result)
+        public int Frame
+        {
+            get => _frame > MaxFrame ? MaxFrame : _frame;
+            set => _frame = value;
+        }
+
+        public int Score()
         {
             var score = 0;
             var rollIndex = 0;
-            for (var i = 0; i < MaxFrame; i++)
+            for (var i = 0; i < Frame; i++)
             {
-                if (IsStrike(result, rollIndex))
+                if (IsStrike(rollIndex))
                 {
-                    score += StrikeScore(result, rollIndex);
+                    score += StrikeScore(rollIndex);
                     rollIndex += 1;
                 }
-                else if (IsSpare(result, rollIndex))
+                else if (IsSpare(rollIndex))
                 {
-                    score += SpareScore(result, rollIndex);
+                    score += SpareScore(rollIndex);
                     rollIndex += 2;
                 }
                 else
                 {
-                    score += NormalScore(result, rollIndex);
+                    score += NormalScore(rollIndex);
                     rollIndex += 2;
                 }
             }
             return score;
         }
 
-        private static int NormalScore(IList result, int rollIndex)
+        public void Roll(int pins)
         {
-            return (int)result[rollIndex] + (int)result[rollIndex + 1];
+            if (_firstRow)
+            {
+                if (pins == 10)
+                {
+                    Frame++;
+                }
+                else
+                {
+                    _firstRow = false;
+                }
+            }
+            else
+            {
+                _firstRow = true;
+                Frame++;
+            }
+
+            _pinsPerRoll[_rollIndex++] = pins;
         }
 
-        private static int SpareScore(IList result, int rollIndex)
+        private int NormalScore(int rollIndex)
         {
-            return 10 + (int)result[rollIndex + 2];
+            return _pinsPerRoll[rollIndex] + _pinsPerRoll[rollIndex + 1];
         }
 
-        private static bool IsSpare(IList result, int rollIndex)
+        private int SpareScore(int rollIndex)
         {
-            return (int)result[rollIndex] + (int)result[rollIndex + 1] == 10;
+            return 10 + _pinsPerRoll[rollIndex + 2];
         }
 
-        private static int StrikeScore(IList result, int rollIndex)
+        private bool IsSpare(int rollIndex)
         {
-            return 10 + (int)result[rollIndex + 1] + (int)result[rollIndex + 2];
+            return _pinsPerRoll[rollIndex] + _pinsPerRoll[rollIndex + 1] == 10;
         }
 
-        private static bool IsStrike(IList result, int rollIndex)
+        private int StrikeScore(int rollIndex)
         {
-            return (int)result[rollIndex] == 10;
+            return 10 + _pinsPerRoll[rollIndex + 1] + _pinsPerRoll[rollIndex + 2];
+        }
+
+        private bool IsStrike(int rollIndex)
+        {
+            return _pinsPerRoll[rollIndex] == 10;
         }
     }
 }

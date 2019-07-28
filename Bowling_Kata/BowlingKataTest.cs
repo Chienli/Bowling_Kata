@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Bowling_Kata
@@ -12,114 +13,103 @@ namespace Bowling_Kata
         [TestMethod]
         public void Rolls_all_0_return_0()
         {
-            var result = new ArrayList();
-            Roll(0, result, 20);
+            _bowlingKata.Roll(0);
 
-            ScoreShouldBe(0, result);
+            ScoreShouldBe(0);
         }
 
         [TestMethod]
         public void Rolls_1_return_1()
         {
-            var result = new ArrayList();
-            Roll(1, result);
-            Roll(0, result, 19);
+            _bowlingKata.Roll(1);
 
-            ScoreShouldBe(1, result);
+            ScoreShouldBe(1);
         }
 
         [TestMethod]
         public void Rolls_spare_then_1_return_12()
         {
-            var result = new ArrayList();
-            Roll(5, result);
-            Roll(5, result);
-            Roll(1, result);
-            Roll(0, result, 17);
+            _bowlingKata.Roll(5);
+            _bowlingKata.Roll(5);
+            _bowlingKata.Roll(1);
 
-            ScoreShouldBe(12, result);
+            ScoreShouldBe(12);
         }
 
         [TestMethod]
         public void Rolls_strike_then_1_return_12()
         {
-            var result = new ArrayList();
-            Roll(10, result);
-            Roll(1, result);
-            Roll(0, result, 18);
+            _bowlingKata.Roll(10);
+            _bowlingKata.Roll(1);
 
-            ScoreShouldBe(12, result);
+            ScoreShouldBe(12);
         }
 
         [TestMethod]
         public void Rolls_all_5_return_150()
         {
-            var result = new ArrayList();
-            Roll(5, result, 21);
+            RollManyTimes(5, 21);
 
-            ScoreShouldBe(150, result);
+            ScoreShouldBe(150);
         }
 
         [TestMethod]
         public void Rolls_all_strike_return_300()
         {
-            var result = new ArrayList();
-            Roll(10, result, 12);
+            RollManyTimes(10, 12);
 
-            ScoreShouldBe(300, result);
+            ScoreShouldBe(300);
         }
 
         [TestMethod]
         public void Rolls_all_frame_9_0_return_90()
         {
-            var result = new ArrayList();
             for (var i = 0; i < 10; i++)
             {
-                Roll(9, result);
-                Roll(0, result);
+                _bowlingKata.Roll(9);
+                _bowlingKata.Roll(0);
             }
 
-            ScoreShouldBe(90, result);
+            ScoreShouldBe(90);
         }
 
         [TestMethod]
         public void Sample_All_cases()
         {
-            var result = new ArrayList();
+            _bowlingKata.Roll(1);
+            _bowlingKata.Roll(4);
+            _bowlingKata.Roll(4);
+            _bowlingKata.Roll(5);
+            _bowlingKata.Roll(6);
+            _bowlingKata.Roll(4);
+            _bowlingKata.Roll(5);
+            _bowlingKata.Roll(5);
+            _bowlingKata.Roll(10);
+            _bowlingKata.Roll(0);
+            _bowlingKata.Roll(1);
+            _bowlingKata.Roll(7);
+            _bowlingKata.Roll(3);
+            _bowlingKata.Roll(6);
+            _bowlingKata.Roll(4);
+            _bowlingKata.Roll(10);
+            _bowlingKata.Roll(2);
+            _bowlingKata.Roll(8);
+            _bowlingKata.Roll(6);
 
-            Roll(1, result);
-            Roll(4, result);
-            Roll(4, result);
-            Roll(5, result);
-            Roll(6, result);
-            Roll(4, result);
-            Roll(5, result);
-            Roll(5, result);
-            Roll(10, result);
-            Roll(0, result);
-            Roll(1, result);
-            Roll(7, result);
-            Roll(3, result);
-            Roll(6, result);
-            Roll(4, result);
-            Roll(10, result);
-            Roll(2, result);
-            Roll(8, result);
-            Roll(6, result);
-            ScoreShouldBe(133, result);
+            ScoreShouldBe(133);
         }
 
-        private void ScoreShouldBe(int expected, ArrayList result)
-        {
-            Assert.AreEqual(expected, _bowlingKata.Score(result));
-        }
-
-        private static void Roll(int pins, ArrayList result, int times = 1)
+        private void RollManyTimes(int pins, int times)
         {
             for (var i = 0; i < times; i++)
             {
-                result.Add(pins);
+                _bowlingKata.Roll(pins);
             }
+        }
+
+        private void ScoreShouldBe(int expected)
+        {
+            Assert.AreEqual(expected, _bowlingKata.Score());
         }
     }
 }
